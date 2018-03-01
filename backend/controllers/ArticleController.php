@@ -32,7 +32,7 @@ public function actionAdd(){
             $models->load($request->post());
             $model->load($request->post());
         }
-        if($model->validate() || $models->validate()){
+        if($model->validate() && $models->validate()){
           //var_dump($model->id);exit;
             $models->save();
             //var_dump($models);exit;
@@ -55,7 +55,7 @@ public function actionEdit($id){
     if($request->isPost){
         $models->load($request->post());
         $model->load($request->post());
-        if($model->validate() || $models->validate()){
+        if($model->validate() && $models->validate()){
             $model->save();
             $models->save();
             \Yii::$app->session->setFlash('success', '修改成功');
