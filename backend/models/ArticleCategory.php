@@ -53,4 +53,5 @@ class ArticleCategory extends ActiveRecord
             'is_deleted' => '状态',
         ];
     }
+
 }

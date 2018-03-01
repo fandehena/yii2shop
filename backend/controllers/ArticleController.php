@@ -17,11 +17,11 @@ use yii\web\Controller;
 class ArticleController extends Controller
 {
 public function actionIndex(){
-    $query=Article::find();
+    $query=Article::find()->where(['is_deleted'=>0]);
     $pager=new Pagination();
     $pager->totalCount=$query->count();
     $pager->defaultPageSize=8;
-   $articles = $query->where(['is_deleted'=>0])->offset($pager->offset)->limit($pager->limit)->all();
+   $articles = $query->offset($pager->offset)->limit($pager->limit)->all();
     return $this->render('index',['articles'=>$articles,'pager'=>$pager]);
 }
 public function actionAdd(){
@@ -32,7 +32,7 @@ public function actionAdd(){
             $models->load($request->post());
             $model->load($request->post());
         }
-        if($model->validate()){
+        if($model->validate() || $models->validate()){
           //var_dump($model->id);exit;
             $models->save();
             //var_dump($models);exit;
@@ -55,7 +55,7 @@ public function actionEdit($id){
     if($request->isPost){
         $models->load($request->post());
         $model->load($request->post());
-        if($model->validate()){
+        if($model->validate() || $models->validate()){
             $model->save();
             $models->save();
             \Yii::$app->session->setFlash('success', '修改成功');

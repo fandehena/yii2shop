@@ -17,7 +17,7 @@
         <td><?=$article->articleCategory->name?></td>
         <td><?=$article->sort?></td>
         <td><?=$article->is_deleted?></td>
-        <td><?=date('Y-m-d',$article->create_time)?></td>
+        <td><?=date('Y-m-d H:i:s',$article->create_time)?></td>
         <td><a href="<?=\yii\helpers\Url::to(['article/edit','id'=>$article->id])?>">修改</a>
             <a href="<?=\yii\helpers\Url::to(['article/delete','id'=>$article->id])?>">删除</a>
             <a href="<?=\yii\helpers\Url::to(['article/show','id'=>$article->id])?>">查看</a> </td>
