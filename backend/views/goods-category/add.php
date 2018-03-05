@@ -2,6 +2,7 @@
 /**
 * @var $this \yii\web\view
  */
+use \kucha\ueditor\UEditor;
 $form =\yii\bootstrap\ActiveForm::begin();
 echo $form->field($model,'name')->textInput();
 echo $form->field($model,'parent_id')->hiddenInput();
@@ -41,6 +42,25 @@ JS
 echo '<div>
    <ul id="treeDemo" class="ztree"></ul>
 </div>';
-echo $form->field($model,'intro')->textarea();
+echo $form->field($model,'intro')->widget('kucha\ueditor\UEditor',[
+    'clientOptions' => [
+        //编辑区域大小
+        'initialFrameHeight' => '200',
+        //设置语言
+        'lang' =>'en', //中文为 zh-cn
+        //定制菜单
+        'toolbars' => [
+            [
+                'fullscreen', 'source', 'undo', 'redo', '|',
+                'fontsize',
+                'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat',
+                'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|',
+                'forecolor', 'backcolor', '|',
+                'lineheight', '|',
+                'indent', '|'
+            ],
+        ]
+]
+]);
 echo '<button type="submit" class="btn btn-primary">提交</button>';
 \yii\bootstrap\ActiveForm::end();

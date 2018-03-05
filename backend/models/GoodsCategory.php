@@ -77,4 +77,5 @@ class GoodsCategory extends \yii\db\ActiveRecord
     {
         return new MenuQuery(get_called_class());
     }
+
 }

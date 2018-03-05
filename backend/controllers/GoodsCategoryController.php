@@ -7,6 +7,7 @@ use yii\data\Pagination;
 
 class GoodsCategoryController extends \yii\web\Controller
 {
+    public $enableCsrfValidation=false;
     public function actionIndex()
     {
         $query=GoodsCategory::find();
@@ -38,7 +39,7 @@ class GoodsCategoryController extends \yii\web\Controller
         return $this->render('add',['model'=>$model,'nodes'=>json_encode($nodes)]);
     }
 public function actionTest(){
-     //   $parent=GoodsCategory::findOne(['id'=>1]);
+//        $parent=GoodsCategory::findOne(['id'=>1]);
 //    $countries = new GoodsCategory(['name' => '家用电器']);
 //    $countries->parent_id=0;
 //    $countries->makeRoot();
@@ -61,7 +62,11 @@ public function actionEdit(){
                 $parent=GoodsCategory::findOne(['id'=>$model->parent_id]);
                 $model->prependTo($parent);
             }else{
-                $model->makeRoot();
+                if($model->getOldAttribute('parent_id')==0){
+                    $model->save();
+                }else {
+                    $model->makeRoot();
+                }
             }
             $model->save();
 
@@ -74,12 +79,21 @@ public function actionEdit(){
 
     public function actionDelete($id){
         $model=GoodsCategory::findOne($id);
-        $model->delete();
+        if($model->parent_id){
+            $model->delete();
+        }else{
+            $model->deleteWithChildren();
+        }
+
         return $this->redirect('index');
     }
-//    public function actionTree(){
-//        $model=GoodsCategory::find()->select(['id','name','parent_id'])->all();
-//            var_dump($model);exit;
-//    }
+    public function actions()
+    {
+        return [
+            'upload' => [
+                'class' => 'kucha\ueditor\UEditorAction',
+            ]
+        ];
+    }
 
 }

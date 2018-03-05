@@ -37,9 +37,9 @@ class Goods extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['goods_category_id', 'brand_id', 'stock', 'in_on_sale', 'sort', 'create_time', 'vies_times'], 'integer'],
+            [['goods_category_id', 'brand_id', 'stock', 'is_on_sale','sort','status'], 'integer'],
             [['market_price', 'shop_price'], 'number'],
-            [['name', 'sn'], 'string', 'max' => 20],
+            [['name', 'sn'], 'string', 'max' => 100],
             [['logo'], 'string', 'max' => 255],
         ];
     }
@@ -59,10 +59,20 @@ class Goods extends \yii\db\ActiveRecord
             'market_price' => '市场价格',
             'shop_price' => '商品价格',
             'stock' => '库存',
-            'in_on_sale' => '状态',
+            'is_on_sale' => '是否在售',
             'sort' => '排序',
-            'create_time' => '添加时间',
-            'vies_times' => '浏览次数',
+            'status'=>'状态'
         ];
+    }
+    public function getBrand(){
+        return $this->hasOne(Brand::className(),['id'=>'goods_category_id']);
+    }
+    public function getBrands(){
+        $rows =Brand::find()->all();
+        $res=[];
+        foreach($rows as $row){
+            $res[$row->id]=$row->name;
+        };
+        return $res;
     }
 }
