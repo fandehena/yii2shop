@@ -36,7 +36,7 @@ class BrandController extends \yii\web\Controller
         }
         return $this->render('add',['model'=>$model]);
     }
-public function actionEdit($id){
+    public function actionEdit(){
     $request= \Yii::$app->request;
     $id=$request->get('id');
     $model =  Brand::findOne(['id'=>$id]);
@@ -50,11 +50,19 @@ public function actionEdit($id){
     }
     return $this->render('add',['model'=>$model]);
 }
-public function actionDelete($id){
-    $model=Brand::findOne($id);
+    public function actionDelete($id){
+        $model=Brand::findOne(['id'=>$id]);
+        if($model){
+            if(!$model->delete()){
+                return 'fail';
+            };
+            return 'success';
+
+        }
+        $model->is_deleted=1;
+        $model->save();
     $model->is_deleted=1;
     $model->save();
-    return $this->redirect('index');
 }
 public function actionLogoUpload()
 {
@@ -99,32 +107,32 @@ public function actionLogoUpload()
     }
 }
     //测试文件上传七牛云
-    public function actionTest(){
-        // 需要填写你的 Access Key 和 Secret Key
-        $accessKey ="p__Avo94pM47IW2XyaN677kVk9eGXp02XgmypDiP";
-        $secretKey = "9fqtNmgcYYMgkhiACfDUNg8f-psvyBAKGDWI48kp";
-        //存储空间的名称
-        $bucket = "yiishop";
-        // 构建鉴权对象
-        $auth = new Auth($accessKey, $secretKey);
-        // 生成上传 Token
-        $token = $auth->uploadToken($bucket);
-        // 要上传文件的本地路径
-        $filePath = \Yii::getAlias('@webroot').'/upload/1.jpg';
-        // 上传到七牛后保存的文件名
-        $key = '/upload/1.jpg';
-        // 初始化 UploadManager 对象并进行文件的上传。
-        $uploadMgr = new UploadManager();
-        // 调用 UploadManager 的 putFile 方法进行文件的上传。
-        list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
-        echo "\n====> putFile result: \n";
-        if ($err !== null) {
-            //上传有错误
-            var_dump($err);
-        } else {
-            //上传成功
-            echo '上传成功';
-            var_dump($ret);
-        }
-    }
+//    public function actionTest(){
+//        // 需要填写你的 Access Key 和 Secret Key
+//        $accessKey ="p__Avo94pM47IW2XyaN677kVk9eGXp02XgmypDiP";
+//        $secretKey = "9fqtNmgcYYMgkhiACfDUNg8f-psvyBAKGDWI48kp";
+//        //存储空间的名称
+//        $bucket = "yiishop";
+//        // 构建鉴权对象
+//        $auth = new Auth($accessKey, $secretKey);
+//        // 生成上传 Token
+//        $token = $auth->uploadToken($bucket);
+//        // 要上传文件的本地路径
+//        $filePath = \Yii::getAlias('@webroot').'/upload/1.jpg';
+//        // 上传到七牛后保存的文件名
+//        $key = '/upload/1.jpg';
+//        // 初始化 UploadManager 对象并进行文件的上传。
+//        $uploadMgr = new UploadManager();
+//        // 调用 UploadManager 的 putFile 方法进行文件的上传。
+//        list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
+//        echo "\n====> putFile result: \n";
+//        if ($err !== null) {
+//            //上传有错误
+//            var_dump($err);
+//        } else {
+//            //上传成功
+//            echo '上传成功';
+//            var_dump($ret);
+//        }
+//    }
 }

@@ -20,7 +20,7 @@ public function actionIndex(){
     $query=Article::find()->where(['is_deleted'=>0]);
     $pager=new Pagination();
     $pager->totalCount=$query->count();
-    $pager->defaultPageSize=8;
+    $pager->defaultPageSize=1;
    $articles = $query->offset($pager->offset)->limit($pager->limit)->all();
     return $this->render('index',['articles'=>$articles,'pager'=>$pager]);
 }
@@ -64,12 +64,19 @@ public function actionEdit($id){
     }
     return $this->render('add',['model'=>$model,'models'=>$models]);
 }
-public function actionDelete($id){
-    $model=Article::findOne($id);
-    $model->is_deleted=1;
-    $model->save();
-    return $this->redirect('index');
-}
+    public function actionDelete($id){
+        $model=Article::findOne(['id'=>$id]);
+        if($model){
+            if(!$model->delete()){
+                return 'fail';
+            };
+            return 'success';
+
+        }
+        $model->is_deleted=1;
+        $model->save();
+       // return $this->redirect('index');
+    }
 public function actionShow($id){
     $request= \Yii::$app->request;
     $id=$request->get('id');

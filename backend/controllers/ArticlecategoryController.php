@@ -59,8 +59,14 @@ class ArticlecategoryController extends \yii\web\Controller
         }
         return $this->render('add',['model'=>$model]);
     }
-    public function actionDelete($id){
-        $model=ArticleCategory::findOne($id);
+        public function actionDelete($id){
+            $model=ArticleCategory::findOne(['id'=>$id]);
+            if($model){
+                if(!$model->delete()){
+                    return 'fail';
+                };
+                return 'success';
+            }
         $model->is_deleted=1;
         $model->save();
         return $this->redirect('index');

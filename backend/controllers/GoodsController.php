@@ -142,10 +142,18 @@ class GoodsController extends \yii\web\Controller
         return $this->render('add',['model'=>$model,'models'=>$models,'nodes'=>json_encode($nodes),'parent'=>$parent]);
     }
     public function actionDelete($id){
-        $model=Goods::findOne($id);
-        $model->status=1;
-        $model->save();
-        return $this->redirect('index');
+
+            $model=Goods::findOne(['id'=>$id]);
+            if($model){
+                if(!$model->delete()){
+                    return 'fail';
+                };
+                return 'success';
+
+            }
+            $model->is_deleted=1;
+            $model->save();
+            // return $this->redirect('index');
     }
     public function actions()
     {

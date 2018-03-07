@@ -35,7 +35,7 @@
 </tr>
 
     <?php foreach ($goods as $good):?>
-        <tr>
+        <tr data-id="<?=$good->id?>">
     <td> <?=$good->id?></td>
     <td><?=$good->name?></td>
     <td><?=$good->sn?></td>
@@ -47,11 +47,30 @@
     <td><?=date('Y-m-d H:i:s',$good->create_time)?></td>
 
         <td><a href="<?=\yii\helpers\Url::to(['goods/edit','id'=>$good->id])?>">修改</a>
-            <a href="<?=\yii\helpers\Url::to(['goods/delete','id'=>$good->id])?>">删除</a>
+            <a href="javascript:" class="btn btn-danger btn_del">删除
             <a href="<?=\yii\helpers\Url::to(['goods/photo','id'=>$good->id])?>">图片墙</a>
         </td>
 </tr>
     <?php endforeach;?>
 </table>
 <?php
-echo \yii\widgets\LinkPager::widget(['pagination'=>$pager]);
+echo \yii\widgets\LinkPager::widget(['pagination'=>$pager,
+    'hideOnSinglePage'=>0]);
+$url=\yii\helpers\Url::to(['admin/delete']);
+$this->registerJs(
+    <<<JS
+$(".btn_del").click(function(){
+    if(confirm("确定删除吗?")){
+       
+       var tr=$(this).closest('tr');
+       var id=tr.attr('data-id');
+            $.get("{$url}",{id:id},function(data) {
+              if(data=='success'){
+                  console.log('删除成功');
+                  tr.remove();
+              }
+            });
+    }
+})
+JS
+);
