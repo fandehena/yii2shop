@@ -20,7 +20,7 @@
 <?php
 echo \yii\widgets\LinkPager::widget(['pagination'=>$pager,
     'hideOnSinglePage'=>0]);
-$url=\yii\helpers\Url::to(['admin/delete']);
+$url=\yii\helpers\Url::to(['goods-category/delete']);
 $this->registerJs(
     <<<JS
 $(".btn_del").click(function(){

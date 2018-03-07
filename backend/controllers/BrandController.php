@@ -61,8 +61,6 @@ class BrandController extends \yii\web\Controller
         }
         $model->is_deleted=1;
         $model->save();
-    $model->is_deleted=1;
-    $model->save();
 }
 public function actionLogoUpload()
 {
