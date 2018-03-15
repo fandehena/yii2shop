@@ -29,6 +29,7 @@ $(function(){
 		});
 
 		$("#total").text(total.toFixed(2));
+        edit($(this).closest('tr').attr('data-id'),$(amount).val());
 	});
 
 	//增加
@@ -43,9 +44,8 @@ $(function(){
 		$(".col5 span").each(function(){
 			total += parseFloat($(this).text());
 		});
-
 		$("#total").text(total.toFixed(2));
-        edit($(this).closest('tr').attr('data-id'),$(this).val());
+        edit($(this).closest('tr').attr('data-id'),$(amount).val());
 	});
 
 	//直接输入
@@ -64,7 +64,7 @@ $(function(){
 		});
 
 		$("#total").text(total.toFixed(2));
-        edit($(this).closest('tr').attr('data-id'),$(this).val());
+       // edit($(this).closest('tr').attr('data-id'),$(this).val());
 
 	});
     $('.delete').click(function () {

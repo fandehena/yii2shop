@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "52c6a41436581c165938bafbf9069901",
+    "content-hash": "ef3e9dac3a5cefc95aad7970b62e7d54",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -400,16 +400,16 @@
         },
         {
             "name": "qiniu/php-sdk",
-            "version": "v7.2.2",
+            "version": "v7.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/qiniu/php-sdk.git",
-                "reference": "79290fd9cb5d72cc2feef779008b3aaeeac49eb9"
+                "reference": "67852ba9cdd7f48e0e080961abebafee134fb329"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/qiniu/php-sdk/79290fd9cb5d72cc2feef779008b3aaeeac49eb9.zip",
-                "reference": "79290fd9cb5d72cc2feef779008b3aaeeac49eb9",
+                "url": "https://files.phpcomposer.com/files/qiniu/php-sdk/67852ba9cdd7f48e0e080961abebafee134fb329.zip",
+                "reference": "67852ba9cdd7f48e0e080961abebafee134fb329",
                 "shasum": ""
             },
             "require": {
@@ -447,7 +447,7 @@
                 "sdk",
                 "storage"
             ],
-            "time": "2017-11-07T06:12:11+00:00"
+            "time": "2018-02-20T13:59:54+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -843,6 +843,49 @@
                 "bower-asset/jquery": ">=1.7"
             },
             "type": "bower-asset"
+        },
+        {
+            "name": "chenkby/yii2-region",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chenkby/yii2-region.git",
+                "reference": "b377af6986f0372bb0707512e52a7b54f7d323c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/chenkby/yii2-region/b377af6986f0372bb0707512e52a7b54f7d323c2.zip",
+                "reference": "b377af6986f0372bb0707512e52a7b54f7d323c2",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-widget",
+            "autoload": {
+                "psr-4": {
+                    "chenkby\\region\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "ChenGuanQun",
+                    "email": "99912250@qq.com"
+                }
+            ],
+            "description": "Yii2中国省市区三级联动",
+            "keywords": [
+                "city",
+                "district",
+                "province",
+                "region",
+                "yii2"
+            ],
+            "time": "2017-02-22T07:06:12+00:00"
         },
         {
             "name": "codeception/base",
@@ -2660,7 +2703,7 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v3.4.4",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
@@ -2717,16 +2760,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v3.4.4",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "26b6f419edda16c19775211987651cb27baea7f1"
+                "reference": "067339e9b8ec30d5f19f5950208893ff026b94f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/console/26b6f419edda16c19775211987651cb27baea7f1.zip",
-                "reference": "26b6f419edda16c19775211987651cb27baea7f1",
+                "url": "https://files.phpcomposer.com/files/symfony/console/067339e9b8ec30d5f19f5950208893ff026b94f7.zip",
+                "reference": "067339e9b8ec30d5f19f5950208893ff026b94f7",
                 "shasum": ""
             },
             "require": {
@@ -2782,20 +2825,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-29T09:03:43+00:00"
+            "time": "2018-02-26T15:46:28+00:00"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.4.4",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "e66394bc7610e69279bfdb3ab11b4fe65403f556"
+                "reference": "544655f1fc078a9cd839fdda2b7b1e64627c826a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/css-selector/e66394bc7610e69279bfdb3ab11b4fe65403f556.zip",
-                "reference": "e66394bc7610e69279bfdb3ab11b4fe65403f556",
+                "url": "https://files.phpcomposer.com/files/symfony/css-selector/544655f1fc078a9cd839fdda2b7b1e64627c826a.zip",
+                "reference": "544655f1fc078a9cd839fdda2b7b1e64627c826a",
                 "shasum": ""
             },
             "require": {
@@ -2835,20 +2878,20 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T07:37:34+00:00"
+            "time": "2018-02-03T14:55:07+00:00"
         },
         {
             "name": "symfony/debug",
-            "version": "v3.4.4",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "53f6af2805daf52a43b393b93d2f24925d35c937"
+                "reference": "9b1071f86e79e1999b3d3675d2e0e7684268b9bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/debug/53f6af2805daf52a43b393b93d2f24925d35c937.zip",
-                "reference": "53f6af2805daf52a43b393b93d2f24925d35c937",
+                "url": "https://files.phpcomposer.com/files/symfony/debug/9b1071f86e79e1999b3d3675d2e0e7684268b9bc.zip",
+                "reference": "9b1071f86e79e1999b3d3675d2e0e7684268b9bc",
                 "shasum": ""
             },
             "require": {
@@ -2891,20 +2934,20 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-18T22:16:57+00:00"
+            "time": "2018-02-28T21:49:22+00:00"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v3.4.4",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "09bd97b844b3151fab82f2fdd62db9c464b3910a"
+                "reference": "2bb5d3101cc01f4fe580e536daf4f1959bc2d24d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/dom-crawler/09bd97b844b3151fab82f2fdd62db9c464b3910a.zip",
-                "reference": "09bd97b844b3151fab82f2fdd62db9c464b3910a",
+                "url": "https://files.phpcomposer.com/files/symfony/dom-crawler/2bb5d3101cc01f4fe580e536daf4f1959bc2d24d.zip",
+                "reference": "2bb5d3101cc01f4fe580e536daf4f1959bc2d24d",
                 "shasum": ""
             },
             "require": {
@@ -2947,20 +2990,20 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T07:37:34+00:00"
+            "time": "2018-02-22T10:48:49+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.4.4",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "26b87b6bca8f8f797331a30b76fdae5342dc26ca"
+                "reference": "58990682ac3fdc1f563b7e705452921372aad11d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/event-dispatcher/26b87b6bca8f8f797331a30b76fdae5342dc26ca.zip",
-                "reference": "26b87b6bca8f8f797331a30b76fdae5342dc26ca",
+                "url": "https://files.phpcomposer.com/files/symfony/event-dispatcher/58990682ac3fdc1f563b7e705452921372aad11d.zip",
+                "reference": "58990682ac3fdc1f563b7e705452921372aad11d",
                 "shasum": ""
             },
             "require": {
@@ -3010,20 +3053,20 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T07:37:34+00:00"
+            "time": "2018-02-14T10:03:57+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v3.4.4",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "613e26310776f49a1773b6737c6bd554b8bc8c6f"
+                "reference": "a479817ce0a9e4adfd7d39c6407c95d97c254625"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/finder/613e26310776f49a1773b6737c6bd554b8bc8c6f.zip",
-                "reference": "613e26310776f49a1773b6737c6bd554b8bc8c6f",
+                "url": "https://files.phpcomposer.com/files/symfony/finder/a479817ce0a9e4adfd7d39c6407c95d97c254625.zip",
+                "reference": "a479817ce0a9e4adfd7d39c6407c95d97c254625",
                 "shasum": ""
             },
             "require": {
@@ -3059,7 +3102,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T07:37:34+00:00"
+            "time": "2018-03-05T18:28:11+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -3122,16 +3165,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.4.4",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "eab73b6c21d27ae4cd037c417618dfd4befb0bfe"
+                "reference": "6af42631dcf89e9c616242c900d6c52bd53bd1bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/yaml/eab73b6c21d27ae4cd037c417618dfd4befb0bfe.zip",
-                "reference": "eab73b6c21d27ae4cd037c417618dfd4befb0bfe",
+                "url": "https://files.phpcomposer.com/files/symfony/yaml/6af42631dcf89e9c616242c900d6c52bd53bd1bb.zip",
+                "reference": "6af42631dcf89e9c616242c900d6c52bd53bd1bb",
                 "shasum": ""
             },
             "require": {
@@ -3176,7 +3219,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-21T19:05:02+00:00"
+            "time": "2018-02-16T09:50:28+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -3418,7 +3461,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "chenkby/yii2-region": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

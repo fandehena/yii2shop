@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\filters\RbacFilter;
 use backend\models\Brand;
 use yii\data\Pagination;
 use yii\web\UploadedFile;
@@ -57,7 +58,6 @@ class BrandController extends \yii\web\Controller
                 return 'fail';
             };
             return 'success';
-
         }
         $model->is_deleted=1;
         $model->save();
@@ -133,4 +133,13 @@ public function actionLogoUpload()
 //            var_dump($ret);
 //        }
 //    }
+    public function behaviors()
+   {
+       return [
+           'rbac'=>[
+               'class'=>RbacFilter::class, //默认情况对所有操作生效
+           ]
+       ];
+   }
+
 }

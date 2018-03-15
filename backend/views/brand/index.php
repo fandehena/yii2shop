@@ -14,7 +14,7 @@
             <td><?=$brand->intro?></td>
             <td><img src="<?=$brand->logo;?>" class="img-circle" style="width: 50px"></td>
             <td><?=$brand->sort?></td>
-            <td><a href="<?=\yii\helpers\Url::to(['brand/edit','id'=>$brand->id])?>">修改
+            <td><a class="btn btn-primary" href="<?=\yii\helpers\Url::to(['brand/edit','id'=>$brand->id])?>">修改
                     <a href="javascript:" class="btn btn-danger btn_del">删除
         </tr>
     <?php endforeach;?>

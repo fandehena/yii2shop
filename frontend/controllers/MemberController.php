@@ -29,7 +29,6 @@ class MemberController extends  Controller
             if ($request->isPost) {
                 $model->load($request->post(), '');
                 if ($model->validate()) {
-
                     $model->password_hash = \Yii::$app->security->generatePasswordHash($model->password);
                     $time = time();
                     $model->status = 1;
@@ -70,6 +69,7 @@ class MemberController extends  Controller
                             $model->count = $count;
                             $model->user_id = \Yii::$app->user->id;
                             $model->save();
+                            \Yii::$app->response->cookies->remove('carts');
                         }
 
                     }
@@ -89,6 +89,7 @@ class MemberController extends  Controller
     }
     public function actionLogout(){
         \Yii::$app->user->logout();
+
         \Yii::$app->session->setFlash('info','退出登陆成功');
         return $this->redirect(['member/login']);
     }

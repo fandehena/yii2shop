@@ -18,7 +18,7 @@
         <td><?=$article->sort?></td>
         <td><?=$article->is_deleted?></td>
         <td><?=date('Y-m-d H:i:s',$article->create_time)?></td>
-        <td><a href="<?=\yii\helpers\Url::to(['article/edit','id'=>$article->id])?>">修改</a>
+        <td><a class="btn btn-primary" href="<?=\yii\helpers\Url::to(['article/edit','id'=>$article->id])?>">修改</a>
             <a href="javascript:" class="btn btn-danger btn_del">删除
             <a href="<?=\yii\helpers\Url::to(['article/show','id'=>$article->id])?>">查看</a> </td>
     </tr>

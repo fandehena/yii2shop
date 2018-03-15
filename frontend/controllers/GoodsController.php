@@ -9,13 +9,19 @@
 namespace frontend\controllers;
 
 
+use app\models\Address;
 use backend\models\Goods;
 use backend\models\GoodsCategory;
 use backend\models\GoodsGallery;
 use backend\models\GoodsIntro;
-use Codeception\Module\Yii1;
 use frontend\models\Cart;
+use frontend\models\Delivery;
+use frontend\models\Order;
+use frontend\models\OrderGoods;
+use frontend\models\Payment;
 use yii\data\Pagination;
+use yii\db\Exception;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Cookie;
 
@@ -119,14 +125,17 @@ class GoodsController extends Controller
     {
         if (\Yii::$app->user->isGuest) {
             $cookie = \Yii::$app->request->cookies;
-            $cart = $cookie->get('carts');
-            if ($cart->value) {
-                $carts = unserialize($cart->value);
-            } else {
+            $cart = $cookie->getValue('carts');
+            //var_dump($cart);exit;
+            if ($cart) {
+                $carts = unserialize($cart);
+            }
+            else {
                 $carts = [];
             }
         } else{
             $cts = Cart::find()->where(['user_id'=>\Yii::$app->user->id])->asArray()->all();
+
 //            var_dump($carts);exit;
             $carts = [];
             foreach ($cts as $cart){
@@ -175,7 +184,7 @@ class GoodsController extends Controller
 //            $model = new Cart();
             $carts = Cart::findOne(['goods_id'=>$goods_id]);
             if ($amount){
-                $carts->amount = $amount;
+                $carts->count = $amount;
                 $carts->save(0);
 
             }else{
@@ -185,5 +194,90 @@ class GoodsController extends Controller
 
         }
     }
+    public function actionFlow2(){
+        if(\Yii::$app->user->isGuest){
+            return $this->redirect(['member/login']);
+        }else{
+           // var_dump($id);exit;
+            $delivery=Delivery::find()->all();
+            $payment=Payment::find()->all();
+            $model=Address::find()->where(['user_id'=>\Yii::$app->user->id])->asArray()->all();
+            $cts = Cart::find()->where(['user_id'=>\Yii::$app->user->id])->asArray()->all();
+//            var_dump($carts);exit;
+            $carts = [];
+            foreach ($cts as $cart){
+                $carts[$cart['goods_id']]=$cart['count'];}
+            return $this->render('flow2',['model'=>$model,'carts'=>$carts,'delivery'=>$delivery,'payment'=>$payment]);
+        }
+    }
+public function actionOrder(){
+       // var_dump($_GET);exit;
+        $request=\Yii::$app->request;
+                if($request->isPost) {
+                    $order=new Order();
+                    $payment_id=$_POST['payment_id'];
+                    $address_id=$_POST['address_id'];
+                    $delivery_id=$_POST['delivery_id'];
+                    $payment=Payment::findOne(['payment_id'=>$payment_id]);
+                    $address=Address::findOne(['id'=>$address_id]);
+                    $delivery=Delivery::findOne(['delivery_id'=>$delivery_id]);
+                        $order->member_id = \Yii::$app->user->id;
+                        $order->name = $address->username;
+                        $order->province = $address->provence;
+                        $order->city = $address->city;
+                        $order->area = $address->area;
+                        $order->address = $address->address;
+                        $order->tel = $address->tel;
+                        $order->delivery_id = $delivery->delivery_id;
+                        $order->delivery_price = $delivery->delivery_price;
+                        $order->delivery_name = $delivery->delivery_name;
+                        $order->payment_id = $payment->payment_id;
+                        $order->payment_name = $payment->payment_name;
+                        $order->create_time=time();
+                        $order->total = 0;
+                        $transaction = \Yii::$app->db->beginTransaction();
+                        try{
+                            $order->save();
+                            $carts = Cart::find()->where(['user_id'=>\Yii::$app->user->id])->all();
+                            //var_dump($carts);exit;
+                            foreach ($carts as $cart){
+                                $goods  = Goods::findOne(['id'=>$cart->goods_id]);
+                               // var_dump($goods);exit;
+                                if($goods->stock < $cart->count){
+                                    throw new Exception('['.$goods->name.']没得了');
+                                }
+                                /*$goods->stock -= $cart->count;
+                                $goods->save();*/
+                                $orderGoods = new OrderGoods();
+                                $orderGoods->order_id = $order->id;
+                                $orderGoods->goods_id = $goods->id;
+                                $orderGoods->goods_name = $goods->name;
+                                $orderGoods->logo=$goods->logo;
+                                $orderGoods->price=$goods->shop_price;
+                                $orderGoods->amount=$cart->count;
+                                $orderGoods->total = $goods->shop_price*$cart->count;
+                                $orderGoods->save();
+                                Cart::deleteAll(['user_id'=>\Yii::$app->user->id]);
+
+                            }
+                            $transaction->commit();
+
+                        }
+                        catch (Exception $e) {
+                            $transaction->rollBack();
+                        }
+                };
+    return $this->render('flow3');
+}
+            public function actionFlow3(){
+
+                return $this->render('flow3');
+            }
+            public function actionOrderList(){
+                $id=\Yii::$app->user->id;
+                $order=Order::find()->where(['member_id'=>$id])->limit(3)->asArray()->all();
+               // var_dump($order);exit;
+                return $this->render('order',['order'=>$order]);
+            }
 }
 

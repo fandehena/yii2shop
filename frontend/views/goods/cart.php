@@ -68,7 +68,8 @@
         </thead>
         <tbody>
         <?php foreach ($carts as $goods_id=>$amount):?>
-            <?php $goods=\backend\models\Goods::findOne(['id'=>$goods_id])?>            <tr data-id="<?=$goods['id']?>">
+            <?php $goods=\backend\models\Goods::findOne(['id'=>$goods_id])?>
+            <tr data-id="<?=$goods['id']?>">
                 <td class="col1"><a href=""><img src="<?=$goods->logo?>" alt="" /></a>
                     <strong><a href=""></a><?=$goods['name']?></strong></td>
                 <td class="col3">￥<span><?=$goods['shop_price']?></span></td>
@@ -90,7 +91,7 @@
     </table>
     <div class="cart_btn w990 bc mt10">
         <a href="<?=\yii\helpers\Url::to(['goods/index'])?>" class="continue">继续购物</a>
-        <a href="" class="checkout">结 算</a>
+        <a href="<?=\yii\helpers\Url::to(['goods/flow2'])?>" class="checkout">结 算</a>
     </div>
 </div>
 <!-- 主体部分 end -->

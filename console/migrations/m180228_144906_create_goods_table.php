@@ -26,7 +26,7 @@ class m180228_144906_create_goods_table extends Migration
             'sort'=>$this->integer()->comment('排序'),
             'create_time'=>$this->integer()->comment('添加时间'),
             'vies_times'=>$this->integer()->comment('浏览次数'),
-        ]);
+        ], $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');
     }
 
     /**

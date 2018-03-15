@@ -10,13 +10,15 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'layout'=>false,
+    'language'=>'zh-CN',
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'frontend\models\Member',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
@@ -36,14 +38,22 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+
         'urlManager' => [
+            'suffix'=>'.html',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+        'sms' => [
+            'class'=>\frontend\aliyun\SmsHandler::class,
+            'ak'=>'LTAILYueoC0np3E5',
+            'sk'=>'s4hYNBes93r1mPNQIWfFjmVtewwlUD',
+            'sign'=>'小凡茶楼',
+            'template'=>'SMS_126920049'
+        ]
+
     ],
     'params' => $params,
 ];

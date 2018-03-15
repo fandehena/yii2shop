@@ -57,4 +57,26 @@ $(function(){
 		$(".company_input").attr("disabled","disabled");
 	});
 
+    $('.delivery_select input[type=radio]').each(function () {
+        $(this).change(function () {
+            var price = $(this).closest('td').next().text();
+            $('.freight').text(price);
+
+            var shop_price = parseInt($('.shop_price').text().substring(1));
+            var freight = parseInt(price.substring(1));
+            //>>总金额
+            $('.sum_price').text((shop_price+freight).toFixed(2));
+            //>应付
+            $('.cope_with').text((shop_price+freight).toFixed(2));
+
+        });
+    });
+    var shop_price = parseInt($('.shop_price').text().substring(1));
+    var freight = parseInt($('.freight').text().substring(1));
+    //>>总金额
+    $('.sum_price').text((shop_price+freight).toFixed(2));
+    //>应付
+    $('.cope_with').text((shop_price+freight).toFixed(2));
+
+
 });

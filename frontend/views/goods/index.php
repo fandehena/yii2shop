@@ -23,7 +23,7 @@
 			</div>
 			<div class="topnav_right fr">
 				<ul>
-					<li>您好，欢迎来到京西！[<a href="/login.html">登录</a>] [<a href="/register.html">免费注册</a>] </li>
+					<li>你好，欢迎来到京西！[<a href="<?=\yii\helpers\Url::to(['member/login'])?>">登录</a>][<a href="<?=\yii\helpers\Url::to(['member/register'])?>">免费注册</a>] </li>
 					<li class="line">|</li>
 					<li>我的订单</li>
 					<li class="line">|</li>
@@ -74,7 +74,6 @@
 					</dt>
 					<dd>
 						<div class="prompt">
-							您好，请<a href="">登录</a>
 						</div>
 						<div class="uclist mt10">
 							<ul class="list1 fl">

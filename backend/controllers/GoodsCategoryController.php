@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\filters\RbacFilter;
 use backend\models\GoodsCategory;
 use yii\data\Pagination;
 
@@ -25,12 +26,6 @@ class GoodsCategoryController extends \yii\web\Controller
         if($request->isPost){
             $model->load($request->post());
             if($model->validate()){
-                if($model->parent_id){
-                    $parent=GoodsCategory::findOne(['id'=>$model->parent_id]);
-                    $model->prependTo($parent);
-                }else{
-                    $model->makeRoot();
-                }
                 $model->save();
                 \Yii::$app->session->setFlash('success','添加成功');
                 return $this->redirect(['goods-category/index']);
@@ -38,7 +33,7 @@ class GoodsCategoryController extends \yii\web\Controller
         }
         return $this->render('add',['model'=>$model,'nodes'=>json_encode($nodes)]);
     }
-public function actionTest(){
+//public function actionTest(){
 //        $parent=GoodsCategory::findOne(['id'=>1]);
 //    $countries = new GoodsCategory(['name' => '家用电器']);
 //    $countries->parent_id=0;
@@ -48,7 +43,7 @@ public function actionTest(){
 //    $russia->parent_id=1;
 //    $russia->prependTo($parent);
 //    echo '添加成功';
-}
+//}
 public function actionEdit(){
     $request= \Yii::$app->request;
     $id=$request->get('id');
@@ -95,5 +90,12 @@ public function actionEdit(){
             ]
         ];
     }
-
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::class, //默认情况对所有操作生效
+            ]
+        ];
+    }
 }

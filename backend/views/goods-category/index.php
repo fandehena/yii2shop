@@ -10,7 +10,7 @@
             <td><?=$good->id?></td>
             <td><?=str_repeat('--',$good->depth).$good->name?></td>
             <td><?=$good->intro?></td>
-            <td><a href="<?=\yii\helpers\Url::to(['goods-category/edit','id'=>$good->id])?>">修改</a>
+            <td><a href="<?=\yii\helpers\Url::to(['goods-category/edit','id'=>$good->id])?>" class="btn btn-primary">修改</a>
                 <a href="javascript:" class="btn btn-danger btn_del">删除
             </td>
         </tr>

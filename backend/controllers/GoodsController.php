@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\filters\RbacFilter;
 use backend\models\Goods;
 use backend\models\GoodsCategory;
 use backend\models\GoodsDayCount;
@@ -11,7 +12,6 @@ use Qiniu\Auth;
 use Qiniu\Storage\UploadManager;
 use yii\data\Pagination;
 use yii\web\UploadedFile;
-
 class GoodsController extends \yii\web\Controller
 {
     public $enableCsrfValidation = false;
@@ -27,19 +27,19 @@ class GoodsController extends \yii\web\Controller
             $pager = new Pagination();
             $query = Goods::find()->where(['status' => 0]);
             $pager->totalCount = $query->count();
-            $pager->defaultPageSize = 4;
+            $pager->defaultPageSize = 10;
             $goods = $query->limit($pager->limit)->offset($pager->offset)->all();
             return $this->render('index', ['goods' => $goods, 'pager' => $pager]);
         }
         elseif ($get !== null) {
             {
-                $sql =[] ;
                 $name = $get['GoodsSearchForm']['name'];
                 $sn = $get['GoodsSearchForm']['sn'];
                 //var_dump($sn);exit;
                 $minPrice = $get['GoodsSearchForm']['minPrice'];
                 $maxPrice = $get['GoodsSearchForm']['maxPrice'];
                 //var_dump($name);exit;
+                $sql ='';
                 if ($name !== null) {
                     $sql = ['like', 'name', $name];
                 } elseif ($sn !== null) {
@@ -76,16 +76,16 @@ class GoodsController extends \yii\web\Controller
             // var_dump($parent);exit;
                 $date = date('Ymd');
                 $goodsCount = GoodsDayCount::findOne(['day' => $date]);
-               //var_dump($count);exit;
+                //var_dump($goodsCount);exit;
                 if ($goodsCount ==null) {
                     $gdc->day = $date;
                     $gdc->count = 0;
                 }
                 $count=$gdc->count+1;
+               // var_dump($count);exit;
                 $model->sn=$date.str_pad($count,5,"0",STR_PAD_LEFT);
                 $gdc->count=$count;
                 $gdc->save();
-              //  var_dump($gdc->count);exit;
                 $model->create_time = time();
                 $model->goods_category_id = $parent->parent_id;
                 $model->save();
@@ -151,9 +151,9 @@ class GoodsController extends \yii\web\Controller
                 return 'success';
 
             }
-            $model->is_deleted=1;
+            $model->status=1;
             $model->save();
-            // return $this->redirect('index');
+             return $this->redirect('index');
     }
     public function actions()
     {
@@ -231,11 +231,23 @@ class GoodsController extends \yii\web\Controller
 }
     public function actionDel($id){
     $model=GoodsGallery::findOne($id);
+        if($model){
+            if(!$model->delete()){
+                return 'fail';
+            };
+            return 'success';
+        }
     //var_dump($model->goods_id);exit;
     $model->delete();
     return $this->redirect(['goods/photo'.'?id='.$model->goods_id]);
 }
-//    public function actionSouSuo(){
-//
-//    }
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::class, //默认情况对所有操作生效
+                'except'=>['upload','logo-upload']
+            ]
+        ];
+    }
 }

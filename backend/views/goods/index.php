@@ -46,9 +46,8 @@
     <td><?=$good->sort?></td>
     <td><?=date('Y-m-d H:i:s',$good->create_time)?></td>
 
-        <td><a href="<?=\yii\helpers\Url::to(['goods/edit','id'=>$good->id])?>">修改</a>
+        <td><a href="<?=\yii\helpers\Url::to(['goods/edit','id'=>$good->id])?>" class="btn btn-primary">修改</a>
             <a href="javascript:" class="btn btn-danger btn_del">删除
-            <a href="<?=\yii\helpers\Url::to(['goods/photo','id'=>$good->id])?>">图片墙</a>
         </td>
 </tr>
     <?php endforeach;?>

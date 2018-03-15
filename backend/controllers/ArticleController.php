@@ -9,6 +9,7 @@
 namespace backend\controllers;
 
 
+use backend\filters\RbacFilter;
 use backend\models\Article;
 use backend\models\ArticleDetail;
 use yii\data\Pagination;
@@ -85,4 +86,12 @@ public function actionShow($id){
   // var_dump($contents);exit;
    return $this->render('show',['contents'=>$contents]);
 }
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::class, //默认情况对所有操作生效
+            ]
+        ];
+    }
 }

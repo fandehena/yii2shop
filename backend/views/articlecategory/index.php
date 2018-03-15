@@ -14,7 +14,7 @@
             <td><?=$article->intro?></td>
             <td><img src="<?=$article->logo;?>" class="img-circle" style="width: 50px"></td>
             <td><?=$article->sort?></td>
-            <td><a href="<?=\yii\helpers\Url::to(['articlecategory/edit','id'=>$article->id])?>">修改
+            <td><a class="btn btn-primary" href="<?=\yii\helpers\Url::to(['articlecategory/edit','id'=>$article->id])?>">修改
                     <a href="javascript:" class="btn btn-danger btn_del">删除
         </tr>
     <?php endforeach;?>
