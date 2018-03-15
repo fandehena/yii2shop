@@ -15,10 +15,6 @@ class GoodsIntro extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
-        return 'goods_intro';
-    }
 
     /**
      * @inheritdoc

@@ -21,10 +21,6 @@ class Brand extends ActiveRecord
      * @inheritdoc
      */
    // public $imgFile;
-    public static function tableName()
-    {
-        return 'Brand';
-    }
 
     /**
      * @inheritdoc

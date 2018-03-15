@@ -17,10 +17,6 @@ class GoodsGallery extends \yii\db\ActiveRecord
      * @inheritdoc
      */
     public $imgFile;
-    public static function tableName()
-    {
-        return 'goods_gallery';
-    }
 
     /**
      * @inheritdoc

@@ -21,11 +21,6 @@ class ArticleCategory extends ActiveRecord
      * @inheritdoc
      */
     public $imgFile;
-    public static function tableName()
-    {
-        return 'Article_category';
-    }
-
     /**
      * @inheritdoc
      */
